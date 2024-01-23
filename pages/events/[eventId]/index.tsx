@@ -1,11 +1,13 @@
-import React from 'react'
+import { getEventById } from '@/data/data';
+import { useRouter } from 'next/router';
+import React from 'react';
 
 function EventDetail() {
-  return (
-    <div>
-      Event Details Page
-    </div>
-  )
+  const router = useRouter();
+  const eventId = router.query.eventId;
+  const event = getEventById(eventId);
+
+  return <>Event Details page</>;
 }
 
-export default EventDetail
+export default EventDetail;

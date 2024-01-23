@@ -1,14 +1,16 @@
-import { EventItem, EventItemProps } from './eventItem';
+import { EventItem, EventItemProps } from '../eventItem/eventItem';
+import styles from './eventList.module.css';
 
 interface EventListProps {
   eventItem: EventItemProps[];
 }
 
 export const EventList = (props: EventListProps) => {
+
+  console.log('props.eventItem',props.eventItem)
   return (
-    <div>
-      <ul>
-        {props.eventItem.map((event) => (
+      <ul className={styles.list}>
+        {props.eventItem.map(event => (
           <EventItem
             key={event.id}
             id={event.id}
@@ -21,6 +23,5 @@ export const EventList = (props: EventListProps) => {
           />
         ))}
       </ul>
-    </div>
   );
 };

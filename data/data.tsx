@@ -51,3 +51,7 @@ export function getAllEvents() {
 export function getFeaturedEvents() {
   return data.filter((event) => event.isFeatured);
 }
+
+export function getEventById(id: any){
+  return data.find((event) => event.id === id);
+}
