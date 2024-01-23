@@ -1,6 +1,6 @@
+import{ ReactNode } from 'react';
 import Link from 'next/link';
-import React, { ReactNode } from 'react';
-
+import styles from '@/components/ui/button/button.module.css'
 export interface ButtonProps {
   label?: string;
   href?: string;
@@ -15,11 +15,11 @@ export const Button: React.FC<ButtonProps> = ({ label, href, onClick, children, 
   return (
     <>
       {href ? (
-        <Link href={href} className={className}>
+        <Link href={href} className={`${styles.btn} ${className}`}>
           {buttonText}
         </Link>
       ) : (
-        <button onClick={onClick} className={className}>{buttonText}</button>
+        <button onClick={onClick} className={`${styles.btn} ${className}`}>{buttonText}</button>
       )}
     </>
   );
