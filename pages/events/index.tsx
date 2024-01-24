@@ -3,10 +3,13 @@ import { getAllEvents } from '@/data/data';
 import { EventSearch } from '@/components/eventSearch/eventSearch';
 import { useRouter } from 'next/router';
 
-const years = [2021, 2022, 2023];
+const years = [2021, 2022, 2023,2024];
 const months = [
   { value: 1, label: 'Jan' },
-  { value: 2, label: 'Feb' },
+  { value: 2, label: 'February' },
+  { value: 3, label: 'March' },
+  { value: 4, label: 'April' },
+
   // ... other months
 ];
 const buttonText = 'Search';
@@ -15,10 +18,8 @@ export const AllEvents = () => {
   const router = useRouter();
 
   const findEventHandler = (year, months)=>{
-    const fullPath = `/event/${year}/${months}`;
-
+    const fullPath = `/events/${year}/${months}`;
     router.push(fullPath)
-
   }
 
   return (

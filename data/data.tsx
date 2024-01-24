@@ -52,6 +52,17 @@ export function getFeaturedEvents() {
   return data.filter((event) => event.isFeatured);
 }
 
-export function getEventById(id: any){
+export function getEventById(id: any) {
   return data.find((event) => event.id === id);
+}
+
+export function getFilteredEvents(filterData) {
+  const { year, month } = filterData;
+
+  const FilteredData = data.filter((event) => {
+    const eventDate = new Date(event.date);
+    return eventDate.getFullYear() === year && eventDate.getMonth() === month-1;
+  });
+
+  return FilteredData;
 }
