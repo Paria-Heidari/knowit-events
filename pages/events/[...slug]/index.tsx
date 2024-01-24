@@ -1,6 +1,8 @@
 import { EventList } from '@/components/eventList/eventList';
 import { getFilteredEvents } from '@/data/data';
 import { useRouter } from 'next/router';
+import { Button } from '@/components/ui/button/button';
+import ErrorAlert from '@/components/ui/button/errorAlert';
 
 function FilteredEvents() {
   const router = useRouter();
@@ -19,7 +21,16 @@ function FilteredEvents() {
   });
 
   if (!filteredEvents || filteredEvents.length === 0) {
-    return <p> No Event found for chosen filter!</p>;
+    return (
+      <>
+        <ErrorAlert>
+          <p> No Event found for chosen filter!</p>
+        </ErrorAlert>
+        <div>
+          <Button label='Show All Events' href='/events' />
+        </div>
+      </>
+    );
   }
 
   return (
