@@ -1,6 +1,6 @@
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
-import { getFeaturedEvents } from '@/data/data';
+import { getFeaturedEvents } from '@/data/data1';
 import { EventList } from '@/components/eventList/eventList';
 
 const inter = Inter({ subsets: ['latin'] })

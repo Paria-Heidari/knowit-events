@@ -1,5 +1,5 @@
 import { EventList } from '@/components/eventList/eventList';
-import { getFilteredEvents } from '@/data/data';
+import { getFilteredEvents } from '@/data/data1';
 import { useRouter } from 'next/router';
 import { Button } from '@/components/ui/button/button';
 import ErrorAlert from '@/components/ui/button/errorAlert';

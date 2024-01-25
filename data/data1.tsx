@@ -1,4 +1,4 @@
-const data = [
+export const data = [
   {
     id: 'e1',
     title: 'KXO: Kino',
@@ -61,7 +61,9 @@ export function getFilteredEvents(filterData) {
 
   const FilteredData = data.filter((event) => {
     const eventDate = new Date(event.date);
-    return eventDate.getFullYear() === year && eventDate.getMonth() === month-1;
+    return (
+      eventDate.getFullYear() === year && eventDate.getMonth() === month - 1
+    );
   });
 
   return FilteredData;
