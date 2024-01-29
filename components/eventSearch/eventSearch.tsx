@@ -20,13 +20,14 @@ export const EventSearch = (props: EventSearchProps) => {
     let selectedYear: string | undefined;
     let selectedMonth : string | undefined;
 
+
     if(yearInputRef.current){
-    selectedYear = yearInputRef.current.value;
+      selectedYear = yearInputRef.current.value;
     }
     if(monthInputRef.current){
       selectedMonth = monthInputRef.current.value;
     }
-
+    
     props.onSearch(selectedYear, selectedMonth )
   }
   return (

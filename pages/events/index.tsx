@@ -1,10 +1,9 @@
-import fs from 'fs/promises';
-import path from 'path';
 import { EventList } from '@/components/eventList/eventList';
 import { EventSearch } from '@/components/eventSearch/eventSearch';
+import { getData } from '@/util/actions';
 import { useRouter } from 'next/router';
 
-const years = [2021, 2022, 2023, 2024];
+export const years = [2021, 2022, 2023, 2024];
 const months = [
   { value: 1, label: 'Jan' },
   { value: 2, label: 'February' },
@@ -14,14 +13,13 @@ const months = [
   // ... other months
 ];
 const buttonText = 'Search';
-export const AllEvents = (props: { events: any; }) => {
-  const {events} = props;
-  // const events = getAllEvents();
+export const AllEvents = (props: { events: any }) => {
+  const { events } = props;
   const router = useRouter();
-  console.log(events)
 
   const findEventHandler = (year: any, months: any) => {
     const fullPath = `/events/${year}/${months}`;
+    router.push(fullPath);
   };
 
   return (
@@ -40,18 +38,15 @@ export const AllEvents = (props: { events: any; }) => {
 // will pre-render a page at build time using the props
 // write server-side code directly in getStaticProps - ex. fetching data
 export const getStaticProps = async () => {
-    const filePath = path.join(process.cwd(), 'data', 'data.json');
-    // Specify 'utf-8' encoding to convert Buffer to string
-    const jsonData = await fs.readFile(filePath, 'utf-8');
-    const events = JSON.parse(jsonData);
+  const events = await getData();
 
-    return {
-      props: {
-        events: events.data,
-      },
-      // Incremental Static Generation (ISR)
-      revalidate: 20
-    };
+  return {
+    props: {
+      events: events.data,
+    },
+    // Incremental Static Generation (ISR)
+    revalidate: 20,
+  };
 };
 
 export default AllEvents;

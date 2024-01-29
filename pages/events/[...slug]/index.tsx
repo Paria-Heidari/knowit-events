@@ -1,24 +1,12 @@
 import { EventList } from '@/components/eventList/eventList';
-import { getFilteredEvents } from '@/data/data1';
-import { useRouter } from 'next/router';
 import { Button } from '@/components/ui/button/button';
 import ErrorAlert from '@/components/ui/button/errorAlert';
+import { getFilteredEvents } from '@/util/actions';
+import { years } from '../index';
+ 
 
-function FilteredEvents() {
-  const router = useRouter();
-  const filterData = router.query.slug;
-
-  if (!filterData) {
-    return <p>Loading...!</p>;
-  }
-
-  const filteredYear = +filterData[0];
-  const filteredMonth = +filterData[1];
-
-  const filteredEvents = getFilteredEvents({
-    year: filteredYear,
-    month: filteredMonth,
-  });
+export default function FilteredEvents(props: { filteredEvents: any; }) {
+  const {filteredEvents} = props;
 
   if (!filteredEvents || filteredEvents.length === 0) {
     return (
@@ -40,4 +28,46 @@ function FilteredEvents() {
   );
 }
 
-export default FilteredEvents;
+export const getStaticPaths =async () => {
+  if(years){
+    const allYears= years;
+    const paths: { params: { slug: string[]; }; }[] = [];
+
+    allYears.forEach((year) => {
+      for (let month = 1; month <= 12; month++) {
+        paths.push({ params: { slug: [year.toString(), month.toString()] } });
+      }
+    });
+
+    return{
+      paths,
+      fallback:true
+    }
+  }
+}
+
+
+export const getStaticProps = async (context: { params: { slug: any; }; }) => {
+  const filterData = context.params.slug
+
+  if (!filterData) {
+    return <p>Loading...!</p>;
+  }
+
+  const filteredYear = +filterData[0];
+  const filteredMonth = +filterData[1];
+
+  const filteredEvents = await getFilteredEvents({
+    year: filteredYear,
+    month: filteredMonth,
+  });
+
+  return{
+    props:{
+      filteredEvents: filteredEvents
+    }
+  }
+
+  
+}
+

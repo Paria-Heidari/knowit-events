@@ -7,7 +7,6 @@ interface EventListProps {
 
 export const EventList = (props: EventListProps) => {
 
-  console.log('props.eventItem',props.eventItem)
   return (
       <ul className={styles.list}>
         {props.eventItem.map(event => (
