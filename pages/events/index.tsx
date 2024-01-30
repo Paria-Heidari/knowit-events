@@ -1,6 +1,7 @@
 import { EventList } from '@/components/eventList/eventList';
 import { EventSearch } from '@/components/eventSearch/eventSearch';
 import { getData } from '@/util/actions';
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 
 export const years = [2021, 2022, 2023, 2024];
@@ -24,6 +25,10 @@ export const AllEvents = (props: { events: any }) => {
 
   return (
     <div>
+      <Head>
+        <title>All Events</title>
+        <meta name='description' content='Find All Knowit Events' />
+      </Head>
       <EventSearch
         years={years}
         months={months}

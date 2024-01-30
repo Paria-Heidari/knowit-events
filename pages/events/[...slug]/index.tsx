@@ -2,6 +2,7 @@ import { EventList } from '@/components/eventList/eventList';
 import { Button } from '@/components/ui/button/button';
 import ErrorAlert from '@/components/ui/button/errorAlert';
 import { getFilteredEvents } from '@/util/actions';
+import Head from 'next/head';
 
 export default function FilteredEvents(props) {
   const { filteredEvents } = props;
@@ -21,6 +22,10 @@ export default function FilteredEvents(props) {
 
   return (
     <div>
+      <Head>
+        <title>Filtered Events</title>
+        <meta name='description' content={`All events for filtered Events`} />
+      </Head>
       <EventList eventItem={filteredEvents} />;
     </div>
   );

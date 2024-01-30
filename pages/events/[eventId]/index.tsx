@@ -1,10 +1,10 @@
 import { getData } from '@/util/actions';
 import ErrorAlert from '@/components/ui/button/errorAlert';
 import { getEventById } from '@/data/data1';
+import Head from 'next/head';
 
 function EventDetail(props) {
   const event = props.event;
-
 
   if (!event) {
     return (
@@ -16,6 +16,10 @@ function EventDetail(props) {
 
   return (
     <>
+      <Head>
+        <title>{event.title}</title>
+        <meta name='description' content={event.description} />
+      </Head>
       <p>{event.title}</p>
       <p>{`Event Details page ${event.id}`}</p>
     </>
@@ -44,7 +48,7 @@ export const getStaticProps = async (context) => {
       event: event,
       eventId: eventId,
     },
-    revalidate:30
+    revalidate: 30,
   };
 };
 
