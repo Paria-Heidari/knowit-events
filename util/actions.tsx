@@ -18,9 +18,15 @@ export const getFeaturedEvents = async () => {
   return featuredData;
 };
 
+export const getEventById = async (id) => {
+  const events = await getData();
+  const event = events.data.find((event) => event.id === id);
+  return event;
+};
+
 export const getFilteredEvents = async (filterData) => {
   const { year, month } = filterData;
-  
+
   const events = await getData();
 
   const filteredEvents = events.data.filter((event) => {

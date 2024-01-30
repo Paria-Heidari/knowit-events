@@ -1,13 +1,23 @@
-import { useRouter } from 'next/router';
 import { getData } from '@/util/actions';
+import ErrorAlert from '@/components/ui/button/errorAlert';
+import { getEventById } from '@/data/data1';
 
-function EventDetail() {
-  const router = useRouter();
-  const eventId = router.query.eventId;
+function EventDetail(props) {
+  const event = props.event;
+
+
+  if (!event) {
+    return (
+      <div>
+        <p>Loading...!</p>
+      </div>
+    );
+  }
 
   return (
     <>
-      <p>{`Event Details page ${eventId}`}</p>
+      <p>{event.title}</p>
+      <p>{`Event Details page ${event.id}`}</p>
     </>
   );
 }
@@ -19,21 +29,22 @@ export const getStaticPaths = async () => {
     params: { eventId: event.id },
   }));
   return {
-    paths,
+    paths: paths,
     fallback: false,
   };
 };
 
-export const getStaticProps = async (context: { params: any }) => {
+export const getStaticProps = async (context) => {
   const { params } = context;
   const eventId = params.eventId;
-  const events = await getData();
-  const event = events.data.find((event: { id: any }) => event.id === eventId);
+  const event = await getEventById(eventId);
 
   return {
     props: {
       event: event,
+      eventId: eventId,
     },
+    revalidate:30
   };
 };
 
